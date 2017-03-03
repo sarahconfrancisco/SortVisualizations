@@ -1,8 +1,9 @@
 const reverseOrder = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
-const y_end = 900;
-const n = reverseOrder.length;
-
+const y_end = 300;
+const m = reverseOrder.length;
+let n = m + 1;
 function whileLoop(stage, sorted){
+  n -= 1;
   if(sorted){
     return null;
   }
@@ -30,7 +31,7 @@ function forLoop(i, stage, sorted){
 }
 
 function createLines(i, x, stage, currentLine, j){
-  if( i === n){
+  if( i === m){
     return null;
   }
   let color = "black";

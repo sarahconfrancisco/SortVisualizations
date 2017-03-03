@@ -13,7 +13,7 @@ This project will consist of a single screen with 3 sort visualizers, sliders, a
 This project will be implemented with the following technologies:
 
 - Vanilla JavaScript and for overall structure and sort logic,
-- d3 and Canvas for DOM manipulation and rendering,
+- Canvas for DOM manipulation and rendering,
 - Webpack to bundle and serve up the various scripts.
 
 In addition to the webpack entry file, there will be three scripts involved in this project:

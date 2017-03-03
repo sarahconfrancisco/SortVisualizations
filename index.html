@@ -6,16 +6,24 @@
     <meta charset="utf-8">
     <title></title>
     <script src="./algorithms/bubble.js"></script>
+    <script src="./algorithms/merge.js"></script>
     <script>
       function init() {
-        const stage = new createjs.Stage("demoCanvas");
         createjs.Ticker.setFPS(60);
-        createjs.Ticker.addEventListener("tick", stage);
-        bubbleSort(stage);
+        const stage1 = new createjs.Stage("canvas1");
+        createjs.Ticker.addEventListener("tick", stage1);
+        const stage2 = new createjs.Stage("canvas2");
+        createjs.Ticker.addEventListener("tick", stage2);
+        const stage3 = new createjs.Stage("canvas3");
+        createjs.Ticker.addEventListener("tick", stage3);
+        bubbleSort(stage1);
+        mergeSort(stage2);
       };
     </script>
   </head>
   <body onload="init();">
-    <canvas id="demoCanvas" width="900" height="900"></canvas>
+    <canvas id="canvas1" width="900" height="300"></canvas>
+    <canvas id="canvas2" width="900" height="300"></canvas>
+    <canvas id="canvas3" width="900" height="300"></canvas>
   </body>
 </html>
