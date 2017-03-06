@@ -1,5 +1,5 @@
 const bubbleArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
-const y_end = 300;
+const bubble_y_end = 300;
 const m = bubbleArray.length;
 let n = m + 1;
 function whileLoop(stage, sorted){
@@ -41,11 +41,11 @@ function createLines(i, x, stage, currentLine, j){
   if (i === j){
     color = "blue";
   }
-  let y_start = y_end - 20 * bubbleArray[i];
+  let y_start = bubble_y_end - 20 * bubbleArray[i];
   let line = new createjs.Shape();
   line.graphics.setStrokeStyle(5).beginStroke(color);
   line.graphics.lineTo(x, y_start);
-  line.graphics.lineTo(x, y_end);
+  line.graphics.lineTo(x, bubble_y_end);
   line.graphics.endStroke();
   stage.addChild(line);
   createLines(i + 1, x + 25, stage, currentLine, j);
