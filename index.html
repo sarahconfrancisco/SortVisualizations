@@ -19,10 +19,12 @@
         createjs.Ticker.addEventListener("tick", stage3);
         mergeSort(stage2);
         bubbleSort(stage1);
+        quickSort(stage3);
       };
     </script>
   </head>
-  <body onload="init();">
+  <body>
+    <button onClick="init();">Start</button>
     <div>
       <span>BubbleSort</span>
       <canvas id="canvas1" width="900" height="300"></canvas>
