@@ -54,5 +54,5 @@ function createLines(i, x, stage, currentLine, j){
 
 function bubbleSort(stage) {
   let sorted = false;
-  setTimeout(() => whileLoop(stage, sorted), 120);
+  whileLoop(stage, sorted);
 };

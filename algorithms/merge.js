@@ -1,9 +1,8 @@
 let mergeArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
 const merge_y_end = 300;
 let mergeArrays_to_render = [];
-function mergeSort(stage2){
+function mergeSort(){
   splitByIndex(0, mergeArray.length - 1);
-  mergeRender(stage2);
 }
 
 
@@ -46,7 +45,7 @@ function mergeByIndex(low, high, mid){
 
 function mergeRender(stage2){
   mergeArrays_to_render.forEach((mergeArrays, i) => {
-    setTimeout(() => mergeRenderStep(stage2, mergeArrays), 750 * (i + 1));
+    setTimeout(() => mergeRenderStep(stage2, mergeArrays), 750 * (i));
   } )
 }
 

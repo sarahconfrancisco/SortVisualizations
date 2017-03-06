@@ -17,14 +17,20 @@
         createjs.Ticker.addEventListener("tick", stage2);
         const stage3 = new createjs.Stage("canvas3");
         createjs.Ticker.addEventListener("tick", stage3);
-        mergeSort(stage2);
-        bubbleSort(stage1);
-        quickSort(stage3);
+        mergeSort();
+        quickSort();
+        render(stage1, stage2, stage3);
       };
+
+      function render (stage1, stage2, stage3){
+        quickRender(stage3);
+        mergeRender(stage2);
+        bubbleSort(stage1);
+      }
     </script>
   </head>
   <body>
-    <button onClick="init();">Start</button>
+    <button onClick="init();">Reverse Order</button>
     <div>
       <span>BubbleSort</span>
       <canvas id="canvas1" width="900" height="300"></canvas>
