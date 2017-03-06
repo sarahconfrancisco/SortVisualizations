@@ -1,69 +1,77 @@
-var array = reverseOrder.slice();
+let mergeArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
 const merge_y_end = 300;
-const n_merge = array.length;
-
-
+let mergeArrays_to_render = [];
 function mergeSort(stage2){
-  splitByIndex(0, n - 1, stage2);
+  splitByIndex(0, mergeArray.length - 1);
+  mergeRender(stage2);
 }
 
-function splitByIndex(low, high, stage2){
-  let mid = Math.ceil( (low + high) / 2);
-  stage2.removeAllChildren();
-  array.forEach((num, i) => {
-    let color = "black";
-    if(num >= low && num <= mid){ color = "red";}
-    if(num > mid && num <= high + 1){ color = "blue";}
-    createLine(stage2, num, i, color);
-  });
-  console.log(array);
 
+
+function splitByIndex(low, high){
   if(high <= low){ return;}
-  splitByIndex(low, mid - 1, stage2);
-  splitByIndex(mid, high, stage2);
+  let mid = Math.ceil( (low + high) / 2);
 
-  let sorted = mergeByIndex(low, high, mid, stage2);
-  sorted.forEach((num, i) => {
-    array[i + low] = num;
-  });
-  stage2.removeAllChildren();
-  array.forEach((num, i) => {
-    let color = "black";
-    if(num >= low && num <= mid){ color = "red";}
-    if(num > mid && num <= high + 1){ color = "blue";}
-    createLine(stage2, num, i, color);
-  });
-  console.log(array);
+
+
+  mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
+  splitByIndex(low, mid -1);
+  splitByIndex(mid, high);
+  mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
+  mergeByIndex(low, high, mid);
+  mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
 
 }
 
-function mergeByIndex(low, high, mid, stage2){
-  let sort = [];
-  let left_i = low;
-  let right_i = mid;
-  while(left_i <= mid && right_i <= high){
-    if(array[left_i] < array[right_i]){
-      sort.push(array[left_i]);
-      left_i += 1;
-    } else {
-      sort.push(array[right_i]);
-      right_i += 1;
-    }
+
+function mergeByIndex(low, high, mid){
+   let sort = [];
+   let left_i = low;
+   let right_i = mid;
+   while(left_i <= mid && right_i <= high){
+     if( mergeArray[left_i] < mergeArray[right_i]){
+       sort.push(mergeArray[left_i]);
+       left_i += 1;
+     } else {
+       sort.push(mergeArray[right_i]);
+       right_i += 1;
+     }
+   }
+
+   let sorted = sort.concat(mergeArray.slice(left_i, mid).concat(mergeArray.slice(right_i, high)));
+   sorted.forEach((num, i) => {
+     mergeArray[i + low] = num;
+     });
   }
-  stage2.removeAllChildren();
-  array.forEach((num, i) => {
-    let color = "black";
-    if(num >= low && num <= mid){ color = "red";}
-    if(num > mid && num <= high + 1){ color = "blue";}
-    createLine(stage2, num, i, color);
-  });
 
-  return sort.concat(array.slice(left_i, mid).concat(array.slice(right_i, high)));
+function mergeRender(stage2){
+  mergeArrays_to_render.forEach((mergeArrays, i) => {
+    setTimeout(() => mergeRenderStep(stage2, mergeArrays), 750 * (i + 1));
+  } )
 }
 
-function createLine(stage2, num, i, color){
-  let x = 300 + 25 * i;
-  let y_start = merge_y_end - 25 * array[i];
+function mergeRenderStep(stage2, mergeArrays){
+  stage2.removeAllChildren();
+  let x = 300;
+  mergeArrays.forEach((arr, i) => {
+    let color = "black";
+    if(i === 1){ color = "red"};
+    if(i === 2){ color = "blue"};
+    if(i !== 0) { x += 25 * mergeArrays[i - 1].length };
+    createMergeLines(stage2, arr, color, x);
+  } )
+}
+
+function createMergeLines(stage2, arr, color, x){
+  arr.forEach((num, i) => {
+    createAMergeLine(stage2, num, color, x);
+    x += 25
+  })
+
+}
+
+function createAMergeLine(stage2, num, color, x){
+  let y_start = merge_y_end - 20 * num;
   let line = new createjs.Shape();
   line.graphics.setStrokeStyle(5).beginStroke(color);
   line.graphics.lineTo(x, y_start);
