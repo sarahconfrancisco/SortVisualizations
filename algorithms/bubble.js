@@ -1,6 +1,6 @@
-const reverseOrder = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
+const bubbleArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
 const y_end = 300;
-const m = reverseOrder.length;
+const m = bubbleArray.length;
 let n = m + 1;
 function whileLoop(stage, sorted){
   n -= 1;
@@ -16,11 +16,11 @@ function whileLoop(stage, sorted){
 
 function forLoop(i, stage, sorted){
   stage.removeAllChildren();
-  createLines(0, 280, stage, i, i + 1);
-  if(reverseOrder[i] > reverseOrder[i + 1]){
-    let temp = reverseOrder[i];
-    reverseOrder[i] = reverseOrder[i + 1];
-    reverseOrder[i + 1] = temp;
+  createLines(0, 300, stage, i, i + 1);
+  if(bubbleArray[i] > bubbleArray[i + 1]){
+    let temp = bubbleArray[i];
+    bubbleArray[i] = bubbleArray[i + 1];
+    bubbleArray[i + 1] = temp;
     sorted = false;
   }
   if(i === n - 2){
@@ -41,7 +41,7 @@ function createLines(i, x, stage, currentLine, j){
   if (i === j){
     color = "blue";
   }
-  let y_start = y_end - 25 * reverseOrder[i];
+  let y_start = y_end - 20 * bubbleArray[i];
   let line = new createjs.Shape();
   line.graphics.setStrokeStyle(5).beginStroke(color);
   line.graphics.lineTo(x, y_start);
@@ -54,5 +54,5 @@ function createLines(i, x, stage, currentLine, j){
 
 function bubbleSort(stage) {
   let sorted = false;
-  whileLoop(stage, sorted);
+  setTimeout(() => whileLoop(stage, sorted), 120);
 };
