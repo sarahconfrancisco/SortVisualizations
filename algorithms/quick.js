@@ -1,7 +1,7 @@
-let quickArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
+let quickArray;
 const quick_y_end = 300;
 let quickArrays_to_render = [];
-let quickLength = quickArray.length - 1;
+let quickLength;
 
 function quickSort(){
   quickSortByIndex(0, quickLength);
@@ -10,34 +10,33 @@ function quickSort(){
 
 function quickSortByIndex(left_i, right_i){
 
-
   let pivot;
-  if(left_i <= right_i){
-    pivot = right_i;
-    partitionIndex = partitionByIndex(pivot, left_i, right_i);
+  if(left_i < right_i){
+    let partition = partitionByIndex(left_i, right_i);
 
 
-   quickSortByIndex(left_i, partitionIndex - 1);
-   quickSortByIndex(partitionIndex + 1, right_i);
+   quickSortByIndex(left_i, partition - 1);
+   quickSortByIndex(partition + 1, right_i);
   }
   return quickArray;
 }
 
-function partitionByIndex(pivot, left_i, right_i){
-   var pivotValue = quickArray[pivot],
-       partitionIndex = left_i;
+function partitionByIndex(left_i, right_i){
+   var pivotValue = quickArray[left_i],
+       partitionIndex = left_i + 1, pivot = left_i;
 
    for(var i = left_i + 1; i <= right_i; i++){
-    //  console.log(quickArray, i, partitionIndex, pivot);
-    quickArrays_to_render.push([quickArray.slice(), i, partitionIndex, pivot]);
+    // console.log(quickArray.slice(), quickArray[i], quickArray[partitionIndex], pivotValue);
+    quickArrays_to_render.push([quickArray.slice(), pivot, partitionIndex, i]);
     if(quickArray[i] < pivotValue){
       swap(i, partitionIndex);
+      quickArrays_to_render.push([quickArray.slice(), pivot, i, partitionIndex]);
       partitionIndex++;
-      quickArrays_to_render.push([quickArray.slice(), i, partitionIndex, pivot]);
     }
   }
-  swap(right_i, partitionIndex);
-  return partitionIndex;
+  swap(pivot, partitionIndex - 1);
+  quickArrays_to_render.push([quickArray.slice(), partitionIndex - 1, pivot, pivot]);
+  return partitionIndex - 1;
 }
 
 function swap(i, j){
@@ -54,22 +53,23 @@ function quickRender(stage3){
 
 function quickRenderStep(stage3, quickStep){
   let quickArr = quickStep[0];
-  let compare1 = quickStep[1];
-  let compare2 = quickStep[2];
-  let pivot = quickStep[3];
-  let x = 300;
+  let pivot = quickStep[1];
+  let partition = quickStep[2];
+  let current = quickStep[3];
+  let x = 100;
   stage3.removeAllChildren();
   quickArr.forEach((num, i) => {
     let color = "black";
-    if(i === compare1 || i === compare2){ color = "blue";}
-    if(i === pivot){ color = "red"; }
+    if(i === pivot){ color = "red";}
+    if(i === partition){ color = "blue"; }
+    if( i === current) { color = "yellow";}
     createAQuickLine(stage3, num, color, x);
     x += 25;
   })
 }
 
 function createAQuickLine(stage3, num, color, x){
-  let y_start = quick_y_end - 20 * num;
+  let y_start = quick_y_end - 15 * num;
   let line = new createjs.Shape();
   line.graphics.setStrokeStyle(5).beginStroke(color);
   line.graphics.lineTo(x, y_start);

@@ -1,0 +1,25 @@
+ul {
+    list-style: none;
+}
+
+li {
+  margin: auto 5px;
+}
+
+.canvas {
+  margin: 20px 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.inner-list {
+  display: flex;
+  margin: auto 5px;
+}
+
+canvas {
+  width: 900px;
+  height: 200px;
+}

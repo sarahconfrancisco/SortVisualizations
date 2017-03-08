@@ -1,25 +1,107 @@
 <!DOCTYPE html>
 <html>
+<body>
+  <ul>
+    <li>
+      <ul class="inner-list">
+        <li>
+          <h3>How many items?<h3>
+        </li>
+          <li>
+            <input type="number" id="userLength" placeholder="Between 2 and 20">
+          </input>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <ul class="inner-list">
+        <li>
+          <h3>How out of order?</h3>
+        </li>
+        <li>
+          <button onClick="init(1);">Reverse Order</button>
+        </li>
+        <li>
+          <button onClick="init(2);">In Order</button>
+        </li>
+        <li>
+          <button onClick="init(3);">Shuffled</button>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <ul>
+        <li>
+          <button onClick="run()">Start</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="canvas">
+    <h3>BubbleSort</h3>
+    <canvas id="canvas1" width="900" height="300"></canvas>
+  </div>
+  <div class="canvas">
+    <h3>MergeSort</h3>
+    <canvas id="canvas2" width="900" height="300"></canvas>
+  </div>
+  <div class="canvas">
+    <h3>QuickSort</h3>
+    <canvas id="canvas3" width="900" height="300"></canvas>
+  </div>
+</body>
   <head>
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    <link rel="stylesheet" href="style.scss" />
     <meta charset="utf-8">
     <title></title>
-    <script src="./algorithms/merge.js"></script>
-    <script src="./algorithms/quick.js"></script>
-    <script src="./algorithms/bubble.js"></script>
     <script>
-      function init() {
-        createjs.Ticker.setFPS(60);
-        const stage1 = new createjs.Stage("canvas1");
-        createjs.Ticker.addEventListener("tick", stage1);
-        const stage2 = new createjs.Stage("canvas2");
-        createjs.Ticker.addEventListener("tick", stage2);
-        const stage3 = new createjs.Stage("canvas3");
-        createjs.Ticker.addEventListener("tick", stage3);
-        mergeSort();
-        quickSort();
-        render(stage1, stage2, stage3);
+      let length = 10;
+      let ARRAY = [];
+      document.getElementById("userLength").onchange = (e) => {
+        let new_l = parseInt(e.currentTarget.value);
+        if (new_l > 2 && new_l <= 20){
+          length = new_l
+        };
+        ARRAY = Array.apply(null, Array(length)).map(function (_, i) {return i + 1;});
+       }
+      function init(arrayType) {
+        if(arrayType === 1){
+            ARRAY.reverse();
+        } else if( arrayType == 3) {
+          let array = ARRAY.slice()
+          for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+          }
+          ARRAY = array;
+        }
+      }
+      </script>
+        <script src="./algorithms/merge.js"></script>
+        <script src="./algorithms/quick.js"></script>
+        <script src="./algorithms/bubble.js"></script>
+      <script>
+        function run(){
+          createjs.Ticker.setFPS(60);
+          const stage1 = new createjs.Stage("canvas1");
+          createjs.Ticker.addEventListener("tick", stage1);
+          const stage2 = new createjs.Stage("canvas2");
+          createjs.Ticker.addEventListener("tick", stage2);
+          const stage3 = new createjs.Stage("canvas3");
+          createjs.Ticker.addEventListener("tick", stage3);
+          quickArray = ARRAY.slice();
+          quickLength = quickArray.length - 1;
+          mergeArray = ARRAY.slice();
+          bubbleArray = ARRAY.slice();
+          m = bubbleArray.length;
+          n = m + 1;
+          mergeSort();
+          quickSort();
+          render(stage1, stage2, stage3);
       };
 
       function render (stage1, stage2, stage3){
@@ -29,19 +111,5 @@
       }
     </script>
   </head>
-  <body>
-    <button onClick="init();">Reverse Order</button>
-    <div>
-      <span>BubbleSort</span>
-      <canvas id="canvas1" width="900" height="300"></canvas>
-    </div>
-    <div>
-      <span>MergeSort</span>
-      <canvas id="canvas2" width="900" height="300"></canvas>
-    </div>
-    <div>
-      <span>QuickSort</span>
-      <canvas id="canvas3" width="900" height="300"></canvas>
-    </div>
-  </body>
+
 </html>

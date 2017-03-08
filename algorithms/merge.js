@@ -1,4 +1,4 @@
-let mergeArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
+let mergeArray;
 const merge_y_end = 300;
 let mergeArrays_to_render = [];
 function mergeSort(){
@@ -14,6 +14,7 @@ function splitByIndex(low, high){
 
 
   mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
+  // console.log(mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length));
   splitByIndex(low, mid -1);
   splitByIndex(mid, high);
   mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
@@ -27,7 +28,7 @@ function mergeByIndex(low, high, mid){
    let sort = [];
    let left_i = low;
    let right_i = mid;
-   while(left_i <= mid && right_i <= high){
+   while(left_i < mid && right_i <= high){
      if( mergeArray[left_i] < mergeArray[right_i]){
        sort.push(mergeArray[left_i]);
        left_i += 1;
@@ -51,7 +52,7 @@ function mergeRender(stage2){
 
 function mergeRenderStep(stage2, mergeArrays){
   stage2.removeAllChildren();
-  let x = 300;
+  let x = 100;
   mergeArrays.forEach((arr, i) => {
     let color = "black";
     if(i === 1){ color = "red"};
@@ -70,7 +71,7 @@ function createMergeLines(stage2, arr, color, x){
 }
 
 function createAMergeLine(stage2, num, color, x){
-  let y_start = merge_y_end - 20 * num;
+  let y_start = merge_y_end - 15 * num;
   let line = new createjs.Shape();
   line.graphics.setStrokeStyle(5).beginStroke(color);
   line.graphics.lineTo(x, y_start);
