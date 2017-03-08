@@ -1,5 +1,27 @@
+/*@import 'libs/vars';
+@import 'libs/functions';
+@import 'libs/mixins';
+@import 'libs/skel';*/
+/*@import 'font-awesome.min.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700');*/
 ul {
     list-style: none;
+}
+
+#footer {
+  height: 50px;
+  width: 100%;
+}
+
+.icons {
+  margin: auto;
+  display: flex;
+  width: 300px
+}
+
+.fa {
+  font-size: 30px;
+  color: black;
 }
 
 li {
