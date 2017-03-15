@@ -1,6 +1,7 @@
 let mergeArray;
 const merge_y_end = 300;
 let mergeArrays_to_render = [];
+let sorted_arrs = [];
 function mergeSort(){
   splitByIndex(0, mergeArray.length - 1);
 }
@@ -31,9 +32,11 @@ function mergeByIndex(low, high, mid){
    while(left_i < mid && right_i <= high){
      if( mergeArray[left_i] < mergeArray[right_i]){
        sort.push(mergeArray[left_i]);
+       sorted_arrs.push(sort.slice());
        left_i += 1;
      } else {
        sort.push(mergeArray[right_i]);
+       sorted_arrs.push(sort.slice());
        right_i += 1;
      }
    }
@@ -48,6 +51,7 @@ function mergeRender(stage2){
   mergeArrays_to_render.forEach((mergeArrays, i) => {
     setTimeout(() => mergeRenderStep(stage2, mergeArrays), 750 * (i));
   } )
+  sorted_arrs
 }
 
 function mergeRenderStep(stage2, mergeArrays){
