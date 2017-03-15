@@ -1,3 +1,21 @@
+let modal = document.getElementById('myModal');
+let openModal = document.getElementById('openModal');
+let closeModal = document.getElementById('closeModal');
+
+openModal.onclick = () => {
+  modal.style.display = "block";
+}
+
+closeModal.onclick = () => {
+  modal.style.display = "none";
+}
+
+window.onclick = (e) => {
+  if(e.target == modal){
+    modal.style.display = "none";
+  }
+}
+
 let ARRAY = [];
 function init(arrayType) {
   if(arrayType === 1){

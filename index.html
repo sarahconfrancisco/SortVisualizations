@@ -14,6 +14,34 @@
       <li>
         <ul class="inner-list">
           <li>
+            <button id="openModal">About</button>
+          </li>
+          <li>
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span id="closeModal">&times;</span>
+                <p>
+                  This application is to show the comparitive speed and logic of three
+                  popular sorts with arrays. Bubble sort is a solution many naive programmers
+                  begin with. Compare every element to its neighbor and switch
+                  if needed. However that takes a lot of time and with large data sets
+                  becomes unmanagable. Merge sort takes the approach of divide and conquer
+                  by sorting sections of the array one at a time. However this causes
+                  the need for an auxillory "sorted" array. That takes up too much
+                  space if you have elements that contain lots and lots of data.
+                  In place quick sort can be faster than merge sort - or as slow
+                  as bubble sort - depending on its inital state and pivot choice
+                  but on average it is the same speed as merge sort with out the
+                  need for extra space.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul class="inner-list">
+          <li>
             <h3>How many items?<h3>
           </li>
             <li>
@@ -42,25 +70,35 @@
         </ul>
       </li>
       <li>
-        <ul>
+        <ul class="inner-list">
           <li>
             <button onClick="run()">Start</button>
           </li>
         </ul>
       </li>
+      <li>
+        <ul id="canvases">
+          <li>
+            <div class="canvas">
+              <h3>BubbleSort</h3>
+              <canvas id="canvas1" width="900" height="300"></canvas>
+            </div>
+          </li>
+          <li>
+            <div class="canvas">
+              <h3>MergeSort</h3>
+              <canvas id="canvas2" width="900" height="300"></canvas>
+            </div>
+          </li>
+          <li>
+            <div class="canvas">
+              <h3>QuickSort</h3>
+              <canvas id="canvas3" width="900" height="300"></canvas>
+            </div>
+          </li>
+        </ul>
+      </li>
     </ul>
-    <div class="canvas">
-      <h3>BubbleSort</h3>
-      <canvas id="canvas1" width="900" height="300"></canvas>
-    </div>
-    <div class="canvas">
-      <h3>MergeSort</h3>
-      <canvas id="canvas2" width="900" height="300"></canvas>
-    </div>
-    <div class="canvas">
-      <h3>QuickSort</h3>
-      <canvas id="canvas3" width="900" height="300"></canvas>
-    </div>
     <div id="footer">
       <ul class="icons">
             <li><a href="https://sarahconfrancisco.github.io/" ><i class="fa fa-laptop" aria-hidden="true"></i></a></li>
