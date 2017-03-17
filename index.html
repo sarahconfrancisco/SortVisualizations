@@ -21,16 +21,16 @@
               <div class="modal-content">
                 <span id="closeModal">&times;</span>
                 <p>
-                  This application is to show the comparitive speed and logic of three
+                  This application is to show the comparative speed and logic of three
                   popular sorts with arrays. Bubble sort is a solution many naive programmers
                   begin with. Compare every element to its neighbor and switch
                   if needed. However that takes a lot of time and with large data sets
-                  becomes unmanagable. Merge sort takes the approach of divide and conquer
+                  becomes unmanageable. Merge sort takes the approach of divide and conquer
                   by sorting sections of the array one at a time. However this causes
-                  the need for an auxillory "sorted" array. That takes up too much
+                  the need for an auxiliary "sorted" array. That takes up too much
                   space if you have elements that contain lots and lots of data.
                   In place quick sort can be faster than merge sort - or as slow
-                  as bubble sort - depending on its inital state and pivot choice
+                  as bubble sort - depending on its initial state and pivot choice
                   but on average it is the same speed as merge sort with out the
                   need for extra space.
                 </p>
@@ -46,7 +46,7 @@
           </li>
             <li>
               <input type="number" id="userLength" placeholder="Between 2 and 20">
-            </input>
+              </input>
           </li>
         </ul>
       </li>
@@ -80,20 +80,23 @@
         <ul id="canvases">
           <li>
             <div class="canvas">
-              <h3>BubbleSort</h3>
-              <canvas id="canvas1" width="900" height="300"></canvas>
+              <div class="half-canvas">
+                <h3>BubbleSort</h3>
+                <canvas id="canvas1" width="600" height="300"></canvas>
+                <h3>QuickSort</h3>
+                <canvas id="canvas3" width="600" height="300"></canvas>
+
+              </div>
             </div>
           </li>
           <li>
             <div class="canvas">
-              <h3>MergeSort</h3>
-              <canvas id="canvas2" width="900" height="300"></canvas>
-            </div>
-          </li>
-          <li>
-            <div class="canvas">
-              <h3>QuickSort</h3>
-              <canvas id="canvas3" width="900" height="300"></canvas>
+              <div class="half-canvas">
+                <h3>MergeSort</h3>
+                <canvas id="canvas2" width="600" height="300"></canvas>
+                <h3>Merging Array</h3>
+                <canvas id="canvas4" width="600" height="300"></canvas>
+              </div>
             </div>
           </li>
         </ul>

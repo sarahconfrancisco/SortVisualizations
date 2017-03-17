@@ -1,33 +1,90 @@
-# SortVisualizations
-Create a visualization of mergesort, quicksort and bubble sort using vanilla JS, d3 html, and css.
-###MVPS
-- [ ] Merge Sort
-- [ ] Quick Sort
-- [ ] Bubble Sort
-- [ ] A slider to change how "out of order" the sort is to start
-- [ ] A start/restart button
-- [ ] A Steps counter
-###WireFrames
-This project will consist of a single screen with 3 sort visualizers, sliders, and step counters
-### Architecture and Technologies
-This project will be implemented with the following technologies:
+# Sort Visualizations
 
-- Vanilla JavaScript and for overall structure and sort logic,
-- Canvas for DOM manipulation and rendering,
-- Webpack to bundle and serve up the various scripts.
+## About
+This application is to show the comparative speed and logic of three
+popular sorts with arrays. Bubble sort is a solution many naive programmers
+begin with. Compare every element to its neighbor and switch
+if needed. However that takes a lot of time and with large data sets
+becomes unmanageable. Merge sort takes the approach of divide and conquer
+by sorting sections of the array one at a time. However this causes
+the need for an auxiliary "sorted" array then overrides a section of the array. However this takes up too much
+space if you have a lot of elements or elements that take up a lot of space.
+In place quick sort can be faster than merge sort - or as slow
+as bubble sort - depending on its initial state and pivot choice
+but on average it is the same speed as merge sort with out the
+need for extra space.
 
-In addition to the webpack entry file, there will be three scripts involved in this project:
+## What It Uses
 
-`merge.js`: this script will handle the logic of the mergesort. `merge_easel.js` elements pertaining to merge sort and rendering them to the DOM.
-`quick.js`: this script will handle the logic of the quicksort. `quick_easel.js` elements pertaining to merge sort and rendering them to the DOM.
-`bubble.js`: this script will handle the logic of the bubblesort. `bubble_easel.js` elements pertaining to merge sort and rendering them to the DOM.
+This application uses vanilla Javascript and DOM manipulation to create the algorithms to sort and render. The application uses Canvas to draw a representation of the state of each array at every step. For bubble sort the user is watching array sort in real time. For merge and quick sort the program sorts the array saving a snapshot of each step to be rendered after it is sorted.
 
 
-### Implementation Timeline
+## Sort Logic
 
-**Day 1**: Setup all necessary Node modules, including getting webpack up and running and `Easel.js` installed.  Create `webpack.config.js` as well as `package.json`.  Write a basic entry file and the bare bones of all scripts outlined above.  Learn the basics of `Easel.js`.
+### Bubble Sort
 
-**Day 2/3**: Learn the `Easel.js` API and the d3 API. Create the sort visualization as well as the sorting scripts.
+```
+  Loop from the first element to the second to last element
 
+  Compare the current element to the next element
 
-**Day 4**: Install the sliders for the user to decide how out of order the sorts start and the start button. Style the frontend, making it polished and professional.
+  Swap the elements if element i > element i + 1
+
+  Loop through the array going to one less element than before because you
+  know the last element checked in the previous loop is the largest
+
+  Continue these loops until you can go through the entire array with no swaps
+```
+
+### Merge Sort
+
+Split the array in half. Then half again. And then again until you can't anymore.
+Then merge.
+```
+  Split an array in half recursively until you are calling the split function with an array of a single element.
+
+  call merge recursively where you merge an array with its neighbor
+
+  check the first element of each array to know what element comes next
+
+  push that element into the sorted array
+
+  over write the section of the whole original array you called merge on with the sorted auxiliary array.
+```
+
+### In Place Quick Sort
+
+This sort uses a partition index to divide and conquer.
+```
+  call split(0, array.length)
+
+  function split(left, right){
+    return out of the function when right < left
+    partition the array into two pieces by keeping track of a partitionIndex
+    partitionIndex = return value of a sort function
+    split(left, partitionIndex - 1)
+    split(partitionIndex + 1, right)
+    this continually splits the array keeping a buffer element between the pieces
+  }
+
+  function sort(left, right){
+    pivotIndex = left
+    pivotElement = array[left]
+    partitionIndex = left + 1
+    partitionElement = array[left + 1]
+    loop from left + 1 to right
+    want to put all elements < pivotElement to the left of the partitionIndex
+    all elements >= pivotElement to the right of the partitionIndex
+    {  
+      compare the current element to the pivotElement
+      if current element < pivotElement
+        swap the current element with the partitionElement
+        increment the partitionIndex
+    }
+
+    Now all the elements to the left of the partitionIndex is smaller than the
+    pivotElement and all the ones to the right greater than.
+    Swap the pivotElement and the partitionIndex - 1
+    return the partitionIndex - 1 
+  }
+```

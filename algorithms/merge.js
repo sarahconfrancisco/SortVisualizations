@@ -51,7 +51,6 @@ function mergeRender(stage2){
   mergeArrays_to_render.forEach((mergeArrays, i) => {
     setTimeout(() => mergeRenderStep(stage2, mergeArrays), 750 * (i));
   } )
-  sorted_arrs
 }
 
 function mergeRenderStep(stage2, mergeArrays){

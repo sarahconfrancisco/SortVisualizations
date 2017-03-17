@@ -6,12 +6,13 @@ function run(){
     createjs.Ticker.addEventListener("tick", stage2);
     const stage3 = new createjs.Stage("canvas3");
     createjs.Ticker.addEventListener("tick", stage3);
-    let length = document.getElementById("userLength").value > 2;
-    if (length < 2 || new_l > 20){
-      length = 10;
+    let new_l = document.getElementById("userLength").value;
+    if (new_l < 2 || new_l > 20){
+      new_l = 10;
     };
     let arrayType;
-    ARRAY = Array.apply(null, Array(length)).map(function (_, i) {return i + 1;});
+    ARRAY = [];
+    for(let i = 1; i <= new_l; i++ ){ ARRAY.push(i)}
     document.querySelectorAll("input[type=radio]").forEach((el) => {
       if(el.checked){
         arrayType = parseInt(el.value);
