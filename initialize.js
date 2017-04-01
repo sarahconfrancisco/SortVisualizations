@@ -18,9 +18,8 @@ window.onclick = (e) => {
 
 function init(arrayType, array) {
   if(arrayType === 1){
-      ARRAY.reverse();
+      array.reverse();
   } else if( arrayType == 3) {
-    let array = ARRAY.slice()
     for (var i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       let temp = array[i];
