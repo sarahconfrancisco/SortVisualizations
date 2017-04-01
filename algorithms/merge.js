@@ -1,37 +1,31 @@
-class MergeSort {
-	constructor(mergeArray, stage, interval = 60){
-		this.stage = stage;
-		this.arraysToRender = [];
-		this.mergeArray = mergeArray;
-		this.length = mergeArray.length;
-		this.interval = interval;
-		this.clock = 0;
-		this.tick = this.tick.bind(this);
+class MergeSort extends Sort {
+	constructor(array, stage, interval){
+		super(array, stage, interval);
 	}
 
 	splitByIndex(low, high){
 		if(high <= low){ return;}
 	  let mid = Math.ceil( (low + high) / 2);
 
-		this.arraysToRender.push([this.mergeArray.slice(0, low),
-															this.mergeArray.slice(low, mid),
-															this.mergeArray.slice(mid, high + 1),
-															this.mergeArray.slice(high+1, this.length)]);
+		this.arraysToRender.push([this.array.slice(0, low),
+															this.array.slice(low, mid),
+															this.array.slice(mid, high + 1),
+															this.array.slice(high+1, this.length)]);
 
 		this.splitByIndex(low, mid -1);
 	  this.splitByIndex(mid, high);
 
-		this.arraysToRender.push([this.mergeArray.slice(0, low),
-														this.mergeArray.slice(low, mid),
-														this.mergeArray.slice(mid, high + 1),
-														this.mergeArray.slice(high+1, this.length)]);
+		this.arraysToRender.push([this.array.slice(0, low),
+														this.array.slice(low, mid),
+														this.array.slice(mid, high + 1),
+														this.array.slice(high+1, this.length)]);
 
 		this.mergeByIndex(low, high, mid);
 
-	  this.arraysToRender.push([this.mergeArray.slice(0, low),
-															this.mergeArray.slice(low, mid),
-															this.mergeArray.slice(mid, high + 1),
-															this.mergeArray.slice(high+1, this.length)]);
+	  this.arraysToRender.push([this.array.slice(0, low),
+															this.array.slice(low, mid),
+															this.array.slice(mid, high + 1),
+															this.array.slice(high+1, this.length)]);
 	}
 
 	mergeByIndex(low, high, mid){
@@ -40,43 +34,39 @@ class MergeSort {
    let right_i = mid;
 	 let idx = 0;
    while(left_i < mid && right_i <= high){
-     if(this.mergeArray[left_i] < this.mergeArray[right_i]){
-       sort.push(this.mergeArray[left_i]);
-			 this.arraysToRender.push([this.mergeArray[left_i], 'red', idx]);
+     if(this.array[left_i] < this.array[right_i]){
+       sort.push(this.array[left_i]);
+			 this.arraysToRender.push([this.array[left_i], 'red', idx]);
 			 idx += 1;
        left_i += 1;
      } else {
-       sort.push(this.mergeArray[right_i]);
-			 this.arraysToRender.push([this.mergeArray[right_i], 'blue', idx]);
+       sort.push(this.array[right_i]);
+			 this.arraysToRender.push([this.array[right_i], 'blue', idx]);
 			 idx += 1;
        right_i += 1;
      }
    }
-	 let left = this.mergeArray.slice(left_i, mid);
+	 let left = this.array.slice(left_i, mid);
 	 left.forEach((num, i) => {
 		 this.arraysToRender.push([num, 'red', idx])
 		 idx += 1;
 		});
-	 let right = this.mergeArray.slice(right_i, high);
+	 let right = this.array.slice(right_i, high);
 	 right.forEach((num, i) => {
 			this.arraysToRender.push([num, 'blue', idx])
 			idx += 1;
 	 });
    let sorted = sort.concat(left.concat(right));
    sorted.forEach((num, i) => {
-     this.mergeArray[i + low] = num;
+     this.array[i + low] = num;
 	 });
 	}
 
-	tick(){
-		this.clock += 1;
-		if(this.clock % this.interval == 0){
-			let step = this.arraysToRender.shift();
-			if(step.length === 4){
-				this.renderMainArray(step);
-			} else {
-				this.renderSortedArray(step);
-			}
+	render(step){
+		if(step.length === 4){
+			this.renderMainArray(step);
+		} else {
+			this.renderSortedArray(step);
 		}
 	}
 
@@ -102,15 +92,5 @@ class MergeSort {
 			this.createALine(num, color, x);
 			x += 25
 		})
-	}
-
-	createALine(num, color, x){
-		let y_start = 300 - 15 * num;
-	  let line = new createjs.Shape();
-	  line.graphics.setStrokeStyle(5).beginStroke(color);
-	  line.graphics.lineTo(x, y_start);
-	  line.graphics.lineTo(x, 300);
-	  line.graphics.endStroke();
-	  this.stage.addChild(line);
 	}
 }

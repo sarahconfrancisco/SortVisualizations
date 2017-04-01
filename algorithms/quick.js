@@ -1,12 +1,7 @@
-class QuickSort {
-	constructor(quickArray, stage, interval = 60){
-		this.stage = stage;
-		this.arraysToRender = [];
-		this.quickArray = quickArray;
-		this.arraysToRender.push([quickArray.slice(), null, null, null]);
-		this.interval = interval;
-		this.clock = 0;
-		this.tick = this.tick.bind(this);
+class QuickSort extends Sort {
+	constructor(array, stage, interval){
+		super(array, stage, interval);
+		this.arraysToRender.push([this.array.slice(), null, null, null]);
 	}
 
 	quickSortByIndex(left_i, right_i){
@@ -18,41 +13,27 @@ class QuickSort {
 	   this.quickSortByIndex(left_i, partition - 1);
 	   this.quickSortByIndex(partition + 1, right_i);
 	  }
-	  return quickArray;
-	}
-
-	swap(i, j){
-	   let temp = this.quickArray[i];
-	   this.quickArray[i] = this.quickArray[j];
-	   this.quickArray[j] = temp;
+	  return this.array;
 	}
 
 	partitionByIndex(left_i, right_i){
-	   let pivotValue = this.quickArray[left_i],
+	   let pivotValue = this.array[left_i],
 	       partitionIndex = left_i + 1, pivot = left_i;
 
 	   for(let i = left_i + 1; i <= right_i; i++){
-	    this.arraysToRender.push([this.quickArray.slice(), pivot, partitionIndex, i]);
-	    if(this.quickArray[i] < pivotValue){
+	    this.arraysToRender.push([this.array.slice(), pivot, partitionIndex, i]);
+	    if(this.array[i] < pivotValue){
 	      this.swap(i, partitionIndex);
-	      this.arraysToRender.push([this.quickArray.slice(), pivot, i, partitionIndex]);
+	      this.arraysToRender.push([this.array.slice(), pivot, i, partitionIndex]);
 	      partitionIndex++;
 	    }
 	  }
 	  this.swap(pivot, partitionIndex - 1);
-	  this.arraysToRender.push([this.quickArray.slice(), partitionIndex - 1, pivot, pivot]);
+	  this.arraysToRender.push([this.array.slice(), partitionIndex - 1, pivot, pivot]);
 	  return partitionIndex - 1;
 	}
 
-	tick(){
-		this.clock += 1;
-		if(this.clock % this.interval === 0){
-			let step = this.arraysToRender.shift();
-			this.renderMainArray(step);
-		}
-	}
-
-	renderMainArray(step){
+	render(step){
 		let quickArr = step[0];
 	  let pivot = step[1];
 	  let partition = step[2];
@@ -67,15 +48,5 @@ class QuickSort {
 	    this.createALine(num, color, x);
 	    x += 25;
 	  })
-	}
-
-	createALine(num, color, x){
-		let y_start = 300 - 15 * num;
-	  let line = new createjs.Shape();
-	  line.graphics.setStrokeStyle(5).beginStroke(color);
-	  line.graphics.lineTo(x, y_start);
-	  line.graphics.lineTo(x, 300);
-	  line.graphics.endStroke();
-	  this.stage.addChild(line);
 	}
 }
