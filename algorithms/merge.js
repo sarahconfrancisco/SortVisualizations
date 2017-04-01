@@ -1,84 +1,116 @@
-let mergeArray;
-const merge_y_end = 300;
-let mergeArrays_to_render = [];
-let sorted_arrs = [];
-function mergeSort(){
-  splitByIndex(0, mergeArray.length - 1);
-}
+class MergeSort {
+	constructor(mergeArray, stage, interval = 60){
+		this.stage = stage;
+		this.arraysToRender = [];
+		this.mergeArray = mergeArray;
+		this.length = mergeArray.length;
+		this.interval = interval;
+		this.clock = 0;
+		this.tick = this.tick.bind(this);
+	}
 
+	splitByIndex(low, high){
+		if(high <= low){ return;}
+	  let mid = Math.ceil( (low + high) / 2);
 
+		this.arraysToRender.push([this.mergeArray.slice(0, low),
+															this.mergeArray.slice(low, mid),
+															this.mergeArray.slice(mid, high + 1),
+															this.mergeArray.slice(high+1, this.length)]);
 
-function splitByIndex(low, high){
-  if(high <= low){ return;}
-  let mid = Math.ceil( (low + high) / 2);
+		this.splitByIndex(low, mid -1);
+	  this.splitByIndex(mid, high);
 
+		this.arraysToRender.push([this.mergeArray.slice(0, low),
+														this.mergeArray.slice(low, mid),
+														this.mergeArray.slice(mid, high + 1),
+														this.mergeArray.slice(high+1, this.length)]);
 
+		this.mergeByIndex(low, high, mid);
 
-  mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
-  // console.log(mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length));
-  splitByIndex(low, mid -1);
-  splitByIndex(mid, high);
-  mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
-  mergeByIndex(low, high, mid);
-  mergeArrays_to_render.push([mergeArray.slice(0, low), mergeArray.slice(low, mid), mergeArray.slice(mid, high + 1), mergeArray.slice(high+1, mergeArray.length)]);
+	  this.arraysToRender.push([this.mergeArray.slice(0, low),
+															this.mergeArray.slice(low, mid),
+															this.mergeArray.slice(mid, high + 1),
+															this.mergeArray.slice(high+1, this.length)]);
+	}
 
-}
-
-
-function mergeByIndex(low, high, mid){
+	mergeByIndex(low, high, mid){
    let sort = [];
    let left_i = low;
    let right_i = mid;
+	 let idx = 0;
    while(left_i < mid && right_i <= high){
-     if( mergeArray[left_i] < mergeArray[right_i]){
-       sort.push(mergeArray[left_i]);
-       sorted_arrs.push(sort.slice());
+     if(this.mergeArray[left_i] < this.mergeArray[right_i]){
+       sort.push(this.mergeArray[left_i]);
+			 this.arraysToRender.push([this.mergeArray[left_i], 'red', idx]);
+			 idx += 1;
        left_i += 1;
      } else {
-       sort.push(mergeArray[right_i]);
-       sorted_arrs.push(sort.slice());
+       sort.push(this.mergeArray[right_i]);
+			 this.arraysToRender.push([this.mergeArray[right_i], 'blue', idx]);
+			 idx += 1;
        right_i += 1;
      }
    }
-
-   let sorted = sort.concat(mergeArray.slice(left_i, mid).concat(mergeArray.slice(right_i, high)));
+	 let left = this.mergeArray.slice(left_i, mid);
+	 left.forEach((num, i) => {
+		 this.arraysToRender.push([num, 'red', idx])
+		 idx += 1;
+		});
+	 let right = this.mergeArray.slice(right_i, high);
+	 right.forEach((num, i) => {
+			this.arraysToRender.push([num, 'blue', idx])
+			idx += 1;
+	 });
+   let sorted = sort.concat(left.concat(right));
    sorted.forEach((num, i) => {
-     mergeArray[i + low] = num;
-     });
-  }
+     this.mergeArray[i + low] = num;
+	 });
+	}
 
-function mergeRender(stage2){
-  mergeArrays_to_render.forEach((mergeArrays, i) => {
-    setTimeout(() => mergeRenderStep(stage2, mergeArrays), 750 * (i));
-  } )
-}
+	tick(){
+		this.clock += 1;
+		if(this.clock % this.interval == 0){
+			let step = this.arraysToRender.shift();
+			if(step.length === 4){
+				this.renderMainArray(step);
+			} else {
+				this.renderSortedArray(step);
+			}
+		}
+	}
 
-function mergeRenderStep(stage2, mergeArrays){
-  stage2.removeAllChildren();
-  let x = 100;
-  mergeArrays.forEach((arr, i) => {
-    let color = "black";
-    if(i === 1){ color = "red"};
-    if(i === 2){ color = "blue"};
-    if(i !== 0) { x += 25 * mergeArrays[i - 1].length };
-    createMergeLines(stage2, arr, color, x);
-  } )
-}
+	renderMainArray(arrs){
+		this.stage.removeAllChildren();
+		let x = 100;
+	  arrs.forEach((arr, i) => {
+	    let color = "black";
+	    if(i === 1){ color = "red"};
+	    if(i === 2){ color = "blue"};
+	    if(i !== 0) { x += 25 * arrs[i - 1].length };
+	    this.createLines(arr, color, x);
+	  })
+	}
 
-function createMergeLines(stage2, arr, color, x){
-  arr.forEach((num, i) => {
-    createAMergeLine(stage2, num, color, x);
-    x += 25
-  })
+	renderSortedArray(step){
+		let x = 700 + step[2] * 25;
+		this.createALine(step[0], step[1], x);
+	}
 
-}
+	createLines(arr, color, x){
+		arr.forEach((num, i) => {
+			this.createALine(num, color, x);
+			x += 25
+		})
+	}
 
-function createAMergeLine(stage2, num, color, x){
-  let y_start = merge_y_end - 15 * num;
-  let line = new createjs.Shape();
-  line.graphics.setStrokeStyle(5).beginStroke(color);
-  line.graphics.lineTo(x, y_start);
-  line.graphics.lineTo(x, merge_y_end);
-  line.graphics.endStroke();
-  stage2.addChild(line);
+	createALine(num, color, x){
+		let y_start = 300 - 15 * num;
+	  let line = new createjs.Shape();
+	  line.graphics.setStrokeStyle(5).beginStroke(color);
+	  line.graphics.lineTo(x, y_start);
+	  line.graphics.lineTo(x, 300);
+	  line.graphics.endStroke();
+	  this.stage.addChild(line);
+	}
 }

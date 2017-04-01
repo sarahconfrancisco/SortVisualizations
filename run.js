@@ -18,14 +18,15 @@ function run(){
         arrayType = parseInt(el.value);
       }
     });
-    init(arrayType);
-    mergeSort();
-    quickSort();
-    render(stage1, stage2, stage3);
-};
 
-function render (stage1, stage2, stage3){
-  quickRender(stage3);
-  mergeRender(stage2);
-  bubbleSort(stage1);
-}
+    init(arrayType);
+		let bubble = new BubbleSort(ARRAY.slice(), stage1);
+    let merge = new MergeSort(ARRAY.slice(), stage2);
+		let quick = new QuickSort(ARRAY.slice(), stage3);
+		bubble.sort();
+		merge.splitByIndex(0, new_l - 1);
+		quick.quickSortByIndex(0, new_l);
+		createjs.Ticker.addEventListener('tick', bubble.tick);
+		createjs.Ticker.addEventListener('tick', merge.tick);
+		createjs.Ticker.addEventListener('tick', quick.tick);
+};
