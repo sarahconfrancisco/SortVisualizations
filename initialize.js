@@ -16,7 +16,7 @@ window.onclick = (e) => {
   }
 }
 
-function init(arrayType, array) {
+function init(arrayType = 3, array) {
   if(arrayType == 1){
       array.reverse();
   } else if( arrayType == 3) {

@@ -25,7 +25,7 @@ function run(){
 		const quick = new QuickSort(masterArray.slice(), stage3, 30);
 		bubble.sort();
 		merge.splitByIndex(0, new_l - 1);
-		quick.quickSortByIndex(0, new_l);
+		quick.sort();
 		createjs.Ticker.addEventListener('tick', bubble.tick);
 		createjs.Ticker.addEventListener('tick', merge.tick);
 		createjs.Ticker.addEventListener('tick', quick.tick);

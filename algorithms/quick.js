@@ -1,7 +1,7 @@
 class QuickSort extends Sort {
-	constructor(array, stage, interval){
-		super(array, stage, interval);
+	sort(){
 		this.arraysToRender.push([this.array.slice(), null, null, null]);
+		this.quickSortByIndex(0, this.length);
 	}
 
 	quickSortByIndex(left_i, right_i){

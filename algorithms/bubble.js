@@ -1,10 +1,6 @@
 class BubbleSort extends Sort{
-	constructor(array, stage, interval){
-		super(array, stage, interval);
-		this.n = this.length + 1;
-	}
-
 	sort(){
+		this.n = this.length + 1;
 		let sorted = false;
 		this.arraysToRender.push([this.array.slice(), null, null]);
 		this.whileLoop(sorted);

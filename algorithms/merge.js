@@ -1,8 +1,4 @@
 class MergeSort extends Sort {
-	constructor(array, stage, interval){
-		super(array, stage, interval);
-	}
-
 	splitByIndex(low, high){
 		if(high <= low){ return;}
 	  let mid = Math.ceil( (low + high) / 2);
