@@ -51,7 +51,7 @@ class MergeSort extends Sort {
 		 this.arraysToRender.push([num, 'red', idx])
 		 idx += 1;
 		});
-	 let right = this.array.slice(right_i, high);
+	 let right = this.array.slice(right_i, high + 1);
 	 right.forEach((num, i) => {
 			this.arraysToRender.push([num, 'blue', idx])
 			idx += 1;

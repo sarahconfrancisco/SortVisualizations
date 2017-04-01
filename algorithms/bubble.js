@@ -6,7 +6,7 @@ class BubbleSort extends Sort{
 
 	sort(){
 		let sorted = false;
-		this.arraysToRender.push([this.array.slice(), null, null])
+		this.arraysToRender.push([this.array.slice(), null, null]);
 		this.whileLoop(sorted);
 	}
 
