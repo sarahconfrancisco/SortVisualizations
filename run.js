@@ -11,18 +11,18 @@ function run(){
       new_l = 20;
     };
     let arrayType;
-    ARRAY = [];
-    for(let i = 1; i <= new_l; i++ ){ ARRAY.push(i)}
+    let array = [];
+    for(let i = 1; i <= new_l; i++ ){ array.push(i)}
     document.querySelectorAll("input[type=radio]").forEach((el) => {
       if(el.checked){
         arrayType = parseInt(el.value);
       }
     });
 
-    init(arrayType);
-		const bubble = new BubbleSort(ARRAY.slice(), stage1);
-    const merge = new MergeSort(ARRAY.slice(), stage2);
-		const quick = new QuickSort(ARRAY.slice(), stage3);
+    let masterArray = init(arrayType, array);
+		const bubble = new BubbleSort(masterArray.slice(), stage1);
+    const merge = new MergeSort(masterArray.slice(), stage2);
+		const quick = new QuickSort(masterArray.slice(), stage3);
 		bubble.sort();
 		merge.splitByIndex(0, new_l - 1);
 		quick.quickSortByIndex(0, new_l);
