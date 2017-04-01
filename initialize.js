@@ -17,7 +17,7 @@ window.onclick = (e) => {
 }
 
 function init(arrayType, array) {
-  if(arrayType === 1){
+  if(arrayType == 1){
       array.reverse();
   } else if( arrayType == 3) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -26,6 +26,6 @@ function init(arrayType, array) {
       array[i] = array[j];
       array[j] = temp;
     }
-    return array;
   }
+	return array;
 }

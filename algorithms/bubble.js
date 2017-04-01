@@ -26,7 +26,7 @@ class BubbleSort extends Sort{
 	    this.swap(i, i + 1);
 	    sorted = false;
 	  }
-	  if(i === this.n - 2){
+	  if(i >= this.n - 2){
 	    this.whileLoop(sorted);
 	  } else {
 	    this.forLoop(i + 1, sorted);

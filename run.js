@@ -20,9 +20,9 @@ function run(){
     });
 
     let masterArray = init(arrayType, array);
-		const bubble = new BubbleSort(masterArray.slice(), stage1);
-    const merge = new MergeSort(masterArray.slice(), stage2);
-		const quick = new QuickSort(masterArray.slice(), stage3);
+		const bubble = new BubbleSort(masterArray.slice(), stage1, 30);
+    const merge = new MergeSort(masterArray.slice(), stage2, 30);
+		const quick = new QuickSort(masterArray.slice(), stage3, 30);
 		bubble.sort();
 		merge.splitByIndex(0, new_l - 1);
 		quick.quickSortByIndex(0, new_l);
