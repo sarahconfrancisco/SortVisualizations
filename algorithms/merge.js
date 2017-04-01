@@ -72,7 +72,7 @@ class MergeSort extends Sort {
 
 	renderMainArray(arrs){
 		this.stage.removeAllChildren();
-		let x = 100;
+		let x = 25;
 	  arrs.forEach((arr, i) => {
 	    let color = "black";
 	    if(i === 1){ color = "red"};
@@ -83,7 +83,7 @@ class MergeSort extends Sort {
 	}
 
 	renderSortedArray(step){
-		let x = 700 + step[2] * 25;
+		let x = 650 + step[2] * 25;
 		this.createALine(step[0], step[1], x);
 	}
 

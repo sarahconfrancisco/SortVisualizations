@@ -8,7 +8,7 @@ function run(){
     createjs.Ticker.addEventListener("tick", stage3);
     let new_l = document.getElementById("userLength").value;
     if (new_l < 2 || new_l > 20){
-      new_l = 10;
+      new_l = 20;
     };
     let arrayType;
     ARRAY = [];

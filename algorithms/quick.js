@@ -38,7 +38,7 @@ class QuickSort extends Sort {
 	  let pivot = step[1];
 	  let partition = step[2];
 	  let current = step[3];
-	  let x = 100;
+	  let x = 25;
 	  this.stage.removeAllChildren();
 	  quickArr.forEach((num, i) => {
 	    let color = "black";

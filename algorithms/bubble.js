@@ -37,7 +37,7 @@ class BubbleSort extends Sort{
 		let arr = step[0]
 		let current = step[1];
 		let next = step[2];
-		let x = 100;
+		let x = 25;
 		this.stage.removeAllChildren();
 		arr.forEach((num, idx) => {
 			let color = 'black';

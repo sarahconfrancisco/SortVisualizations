@@ -7,8 +7,10 @@ ul {
   width: 100%;
 }
 
-h3 {
-  width: 125px;
+span {
+  font-size: 20px;
+	font-weight: bold;
+	margin: 20px 0;
 }
 
 .icons {
@@ -35,11 +37,6 @@ li {
 .canvas > div {
   margin-bottom: 20px;
 }
-
-.half-canvas {
-  display: flex;
-}
-
 
 .inner-list {
   display: flex;
