@@ -18,7 +18,7 @@ function run(){
         arrayType = parseInt(el.value);
       }
     });
-
+		arrayType = arrayType ? arrayType : 3;
     let masterArray = init(arrayType, array);
 		const bubble = new BubbleSort(masterArray.slice(), stage1, 30);
     const merge = new MergeSort(masterArray.slice(), stage2, 30);
