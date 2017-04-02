@@ -9,7 +9,7 @@ class Sort {
 		this.clock = 0;
 		this.paused = false;
 		this.pause = this.pause.bind(this);
-		this.restart = this.restart.bind(this);
+		this.resume = this.resume.bind(this);
 		this.tick = this.tick.bind(this);
 	}
 
@@ -17,7 +17,7 @@ class Sort {
 		this.paused = true;
 	}
 
-	restart(){
+	resume(){
 		this.paused = false;
 	}
 
@@ -28,7 +28,7 @@ class Sort {
 	}
 
 	createALine(num, color, x){
-		let y_start = 300 - 15 * num;
+		const y_start = 300 - 15 * num;
 	  let line = new createjs.Shape();
 	  line.graphics.setStrokeStyle(5).beginStroke(color);
 	  line.graphics.lineTo(x, y_start);
@@ -41,7 +41,7 @@ class Sort {
 		if(this.paused) {return}
 		this.clock += 1;
 		if(this.clock % this.interval === 0){
-			let step = this.arraysToRender.shift();
+			const step = this.arraysToRender.shift();
 			if(step){
 				this.render(step);
 			}

@@ -25,12 +25,12 @@ function run(){
 				speed = (parseInt(el.value) * 10);
 			}
 		});
-		let pause = document.getElementById('pause');
-		let restart = document.getElementById("restart");
+		const pause = document.getElementById('pause');
+		const resume = document.getElementById("resume");
 		arrayType = arrayType ? arrayType : 3;
 		speed = speed ? speed : 30;
 		console.log(speed);
-    let masterArray = init(arrayType, array);
+    const masterArray = init(arrayType, array);
 		const bubble = new BubbleSort(masterArray.slice(), stage1, speed);
     const merge = new MergeSort(masterArray.slice(), stage2, speed);
 		const quick = new QuickSort(masterArray.slice(), stage3, speed);
@@ -39,10 +39,10 @@ function run(){
 			merge.pause();
 			quick.pause();
 		}
-		restart.onclick = () => {
-			bubble.restart();
-			merge.restart();
-			quick.restart();
+		resume.onclick = () => {
+			bubble.resume();
+			merge.resume();
+			quick.resume();
 		}
 		bubble.sort();
 		merge.splitByIndex(0, new_l - 1);
