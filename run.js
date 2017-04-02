@@ -18,11 +18,23 @@ function run(){
         arrayType = parseInt(el.value);
       }
     });
+		let pause = document.getElementById('pause');
+		let restart = document.getElementById("restart");
 		arrayType = arrayType ? arrayType : 3;
     let masterArray = init(arrayType, array);
 		const bubble = new BubbleSort(masterArray.slice(), stage1, 30);
     const merge = new MergeSort(masterArray.slice(), stage2, 30);
 		const quick = new QuickSort(masterArray.slice(), stage3, 30);
+		pause.onclick = () => {
+			bubble.pause();
+			merge.pause();
+			quick.pause();
+		}
+		restart.onclick = () => {
+			bubble.restart();
+			merge.restart();
+			quick.restart();
+		}
 		bubble.sort();
 		merge.splitByIndex(0, new_l - 1);
 		quick.sort();

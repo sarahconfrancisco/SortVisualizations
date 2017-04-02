@@ -7,7 +7,18 @@ class Sort {
 		this.interval = interval;
 		this.arraysToRender = [];
 		this.clock = 0;
+		this.paused = false;
+		this.pause = this.pause.bind(this);
+		this.restart = this.restart.bind(this);
 		this.tick = this.tick.bind(this);
+	}
+
+	pause(){
+		this.paused = true;
+	}
+
+	restart(){
+		this.paused = false;
 	}
 
 	swap(i, j){
@@ -27,6 +38,7 @@ class Sort {
 	}
 
 	tick(){
+		if(this.paused) {return}
 		this.clock += 1;
 		if(this.clock % this.interval === 0){
 			let step = this.arraysToRender.shift();
