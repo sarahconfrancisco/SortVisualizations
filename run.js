@@ -11,20 +11,29 @@ function run(){
       new_l = 20;
     };
     let arrayType;
+		let speed;
     let array = [];
     for(let i = 1; i <= new_l; i++ ){ array.push(i)}
-    document.querySelectorAll("input[type=radio]").forEach((el) => {
+    document.querySelectorAll("input[name=order]").forEach((el) => {
       if(el.checked){
         arrayType = parseInt(el.value);
       }
     });
+
+		document.querySelectorAll("input[name=speed]").forEach((el) => {
+			if(el.checked){
+				speed = (parseInt(el.value) * 10);
+			}
+		});
 		let pause = document.getElementById('pause');
 		let restart = document.getElementById("restart");
 		arrayType = arrayType ? arrayType : 3;
+		speed = speed ? speed : 30;
+		console.log(speed);
     let masterArray = init(arrayType, array);
-		const bubble = new BubbleSort(masterArray.slice(), stage1, 30);
-    const merge = new MergeSort(masterArray.slice(), stage2, 30);
-		const quick = new QuickSort(masterArray.slice(), stage3, 30);
+		const bubble = new BubbleSort(masterArray.slice(), stage1, speed);
+    const merge = new MergeSort(masterArray.slice(), stage2, speed);
+		const quick = new QuickSort(masterArray.slice(), stage3, speed);
 		pause.onclick = () => {
 			bubble.pause();
 			merge.pause();
