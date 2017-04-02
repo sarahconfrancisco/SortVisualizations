@@ -1,6 +1,7 @@
 class Sort {
 	constructor(array, stage, interval = 60){
 		this.stage = stage;
+		this.stage.removeAllChildren();
 		this.array = array;
 		this.length = array.length;
 		this.interval = interval;
@@ -29,7 +30,9 @@ class Sort {
 		this.clock += 1;
 		if(this.clock % this.interval === 0){
 			let step = this.arraysToRender.shift();
-			this.render(step);
+			if(step){
+				this.render(step);
+			}
 		}
 	}
 }
