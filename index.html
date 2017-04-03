@@ -12,7 +12,6 @@
   <body>
     <div>
 			<div id="specifications">
-				<button id="openModal">About</button>
 	      <div id="myModal" class="modal">
 	         <div class="modal-content">
 	          <span id="closeModal">&times;</span>
@@ -32,7 +31,8 @@
 	            </p>
 	          </div>
 	      </div>
-		    <ul class="inner-list">
+				<div class="outer-list">
+		    	<ul class="inner-list">
 		      <li>
 		        <h3>How many items?<h3>
 		      </li>
@@ -41,7 +41,7 @@
 		          </input>
 		      </li>
 		    </ul>
-		    <ul class="inner-list">
+		    	<ul class="inner-list">
 		      <li>
 		        <h3>How out of order?</h3>
 		      </li>
@@ -55,7 +55,9 @@
 		        <input type="radio" name="order" value="3">Shuffled</input>
 		      </li>
 		    </ul>
-		    <ul class="inner-list">
+				</div>
+				<div class="outer-list">
+		    	<ul class="inner-list">
 		      <li>
 		        <h3>Speed?</h3>
 		      </li>
@@ -84,15 +86,21 @@
 						<p>Fastest</p>
 					</li>
 		    </ul>
-		    <ul class="inner-list">
+		    	<ul class="inner-list">
 	      	<li>
 	        	<button onClick="run()">Start</button>
 	      	</li>
 					<li>
 						<button id="pause">Pause</button>
 					</li>
-					<li><button id="resume">Resume</button></li>
+					<li>
+						<button id="resume">Resume</button>
+					</li>
+					<li>
+						<button id="openModal">About</button>
+					</li>
 	    	</ul>
+				</div>
 			</div>
 			<div id="canvases">
         <div class="canvas">

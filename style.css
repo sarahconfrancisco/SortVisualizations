@@ -7,14 +7,38 @@ ul {
   width: 100%;
 }
 
+#canvases {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
 button, div {
 	margin: auto;
+}
+
+input[type="number"] {
+	height: 30px;
 }
 
 span {
   font-size: 20px;
 	font-weight: bold;
 	margin: 20px 0;
+}
+
+button {
+    background-color: #e7e7e7;
+    border: none;
+    color: black;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+button:hover {
+	cursor: pointer;
 }
 
 .icons {
@@ -45,6 +69,11 @@ li {
 .inner-list {
   display: flex;
 	padding: 0;
+}
+
+.outer-list {
+	display: flex;
+	justify-content: space-around;
 }
 
 canvas {
@@ -82,4 +111,10 @@ canvas {
 .close:hover, .close:focus {
   color: black;
   cursor: pointer;
+}
+
+#specifications {
+	width: 900px;
+	background: #829db4;
+	border-radius: 5px;
 }
