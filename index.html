@@ -10,60 +10,67 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <div>
-			<div id="specifications">
+    <div id="specifications">
 	      <div id="myModal" class="modal">
 	         <div class="modal-content">
 	          <span id="closeModal">&times;</span>
-	           <p>
-	              This application is to show the comparative speed and logic of three
-	              popular sorts with arrays. Bubble sort is a solution many naive programmers
+              <h1>Welcome!</h1>
+              <h3>Just Press Start!</h3>
+	          <p>
+	              This application shows the comparative speed and logic of three
+	              popular sort algorithms with arrays of length N filled with
+                  the positive integers 1 to N + 1. Each bar represents an element of the array
+                  and its height represents the element's value. Just press start or first
+                  specify the number of elements in the array, how out of order they
+                  are and how fast the animation goes.
+              </p>
+              <p>
+                  Bubble sort is a solution many naive programmers
 	              begin with. Compare every element to its neighbor and switch
 	              if needed. However that takes a lot of time and with large data sets
 	              becomes unmanageable. Merge sort takes the approach of divide and conquer
 	              by sorting sections of the array one at a time. However this causes
-	              the need for an auxiliary "sorted" array. That takes up too much
-	              space if you have elements that contain lots and lots of data.
+	              the need for an auxiliary "sorted" array.
 	              In place quick sort can be faster than merge sort - or as slow
 	              as bubble sort - depending on its initial state and pivot choice
 	              but on average it is the same speed as merge sort with out the
 	              need for extra space.
-	            </p>
-	          </div>
+	          </p>
+	         </div>
 	      </div>
-				<div class="outer-list">
-		    	<ul class="inner-list">
-		      <li>
-		        <h3>How many items?<h3>
-		      </li>
+		  <div class="outer-list">
+		      <ul class="inner-list">
+		        <li>
+		            <h3>How many items?<h3>
+		        </li>
 		        <li>
 		          <input type="number" id="userLength" placeholder="Between 2 and 20">
 		          </input>
-		      </li>
-		    </ul>
-		    	<ul class="inner-list">
-		      <li>
-		        <h3>How out of order?</h3>
-		      </li>
-		      <li>
-		        <input type="radio" name="order" value="1">Reverse Order</input>
-		      </li>
-		      <li>
-		        <input type="radio" name="order" value="2">In Order</input>
-		      </li>
-		      <li>
-		        <input type="radio" name="order" value="3">Shuffled</input>
-		      </li>
-		    </ul>
-				</div>
-				<div class="outer-list">
-		    	<ul class="inner-list">
+		        </li>
+		      </ul>
+		      <ul class="inner-list">
+    		      <li>
+    		        <h3>How out of order?</h3>
+    		      </li>
+    		      <li>
+    		        <input type="radio" name="order" value="1">Reverse Order</input>
+    		      </li>
+    		      <li>
+    		        <input type="radio" name="order" value="2">In Order</input>
+    		      </li>
+    		      <li>
+    		        <input type="radio" name="order" value="3">Shuffled</input>
+    		      </li>
+		      </ul>
+			</div>
+		  <div class="outer-list">
+		    <ul class="inner-list">
 		      <li>
 		        <h3>Speed?</h3>
 		      </li>
-					<li>
-						<p>Slowest</p>
-					</li>
+			  <li>
+				<p>Slowest</p>
+			  </li>
 		      <li>
 		        <input type="radio" name="speed" value="6"></input>
 		      </li>
@@ -82,54 +89,82 @@
 		      <li>
 		        <input type="radio" name="speed" value="1"></input>
 		      </li>
-					<li>
-						<p>Fastest</p>
-					</li>
+			  <li>
+				<p>Fastest</p>
+			  </li>
 		    </ul>
-		    	<ul class="inner-list">
-	      	<li>
-	        	<button onClick="run()">Start</button>
-	      	</li>
-					<li>
-						<button id="pause">Pause</button>
-					</li>
-					<li>
-						<button id="resume">Resume</button>
-					</li>
-					<li>
-						<button id="openModal">About</button>
-					</li>
+		    <ul class="inner-list">
+	      	  <li>
+	        	<button onClick="run()" id="start">Start</button>
+	      	  </li>
+			  <li>
+				<button id="pause">Pause</button>
+			  </li>
+			  <li>
+				<button id="resume">Resume</button>
+			  </li>
+			  <li>
+				<button id="openModal">About This</button>
+			  </li>
+              <li>
+                <a target="_none" href="https://sarahconfrancisco.github.io/">
+                  <button>About Me</button>
+                </a>
+              </li>
 	    	</ul>
-				</div>
-			</div>
-			<div id="canvases">
-        <div class="canvas">
-          <span>BubbleSort</span>
-          <canvas id="canvas1" width="1200" height="300"></canvas>
-				</div>
-				<div class="canvas">
-					<span>QuickSort</span>
-          <canvas id="canvas3" width="1200" height="300"></canvas>
-        </div>
-	      <div class="canvas">
-	        <span>MergeSort with Auxillory "Sorted" Array</span>
-	        <canvas id="canvas2" width="1200" height="300"></canvas>
-	      </div>
-			</div>
+		  </div>
 		</div>
+    <div id="canvases">
+      <div class="canvas">
+        <span>BubbleSort</span>
+        <canvas id="canvas1" width="1200" height="300"></canvas>
+	  </div>
+	  <div class="canvas">
+		<span>QuickSort</span>
+        <canvas id="canvas3" width="1200" height="300"></canvas>
+      </div>
+	  <div class="canvas">
+	    <span>MergeSort with Auxillory "Sorted" Array</span>
+	    <canvas id="canvas2" width="1200" height="300"></canvas>
+	  </div>
+	</div>
     <div id="footer">
       <ul class="icons">
-            <li><a href="https://sarahconfrancisco.github.io/" ><i class="fa fa-laptop" aria-hidden="true"></i></a></li>
-            <li><a href="https://sarahconfrancisco.github.io/resume.html" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
-  					<li><a href="https://www.linkedin.com/in/sarah-confrancisco/" ><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-  					<li><a href="https://angel.co/sarah-confrancisco" ><i class="fa fa-angellist" aria-hidden="true"></i></a></li>
-            <li><a href="https://github.com/sarahconfrancisco" ><i class="fa fa-github" aria-hidden="true"></i></a></li>
-  					<li><a href="mailto:sarahconfrancisco@gmail.com" ><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+            <li>
+                <a target="_none" href="https://sarahconfrancisco.github.io/" >
+                    <i class="fa fa-laptop" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a target="_none" href="https://sarahconfrancisco.github.io/resume.html" >
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                </a>
+            </li>
+  		    <li>
+                <a target="_none" href="https://www.linkedin.com/in/sarah-confrancisco/" >
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+            </li>
+  			<li>
+                <a target="_none" href="https://angel.co/sarah-confrancisco" >
+                    <i class="fa fa-angellist" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/sarahconfrancisco" >
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+  			<li>
+                <a target="_none" href="mailto:sarahconfrancisco@gmail.com" >
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </a>
+            </li>
   		</ul>
     </div>
   </body>
   <foot>
-		<script src="./algorithms/sort_class.js"></script>
+    <script src="./algorithms/sort_class.js"></script>
     <script src="./initialize.js"></script>
     <script src="./run.js"></script>
     <script src="./algorithms/merge.js"></script>
